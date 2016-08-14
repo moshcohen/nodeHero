@@ -6,7 +6,7 @@ var Hero=require('../models').Hero;
 router.get('/', function(req, res, next) {
     Hero.find()
     .then(function(doc){
-        res.render('index',{items:doc});
+        res.send(doc);
     });
 });
 

@@ -1,1 +1,1 @@
-module.exports='localhost:27017/test';
+module.exports='localhost:27017/local';

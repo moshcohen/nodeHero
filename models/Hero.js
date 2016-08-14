@@ -1,7 +1,6 @@
-var mongoUrl=require('./mongoUrl');
+
 var mongoose=require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoUrl);
 
 var Schema=mongoose.Schema;
 
