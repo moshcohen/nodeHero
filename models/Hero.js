@@ -5,7 +5,6 @@ mongoose.Promise = global.Promise;
 var Schema=mongoose.Schema;
 
 var HeroSchema=new Schema({
-    id:Number,
     name:String,
     picture:String
 },{ collection:'heroes'});
