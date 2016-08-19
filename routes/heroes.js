@@ -18,18 +18,25 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:id', function(req, res, next) {
-    console.log(req.params.id);
     var id=req.params.id;
-    Hero.findbyId(id,function(err,doc){
+    Hero.findById(id,function(err,doc){
         if(err)
         {
             console.error('error');
         }
         ReplacePropertiesFlat(req.body,doc);
-        doc.save;
+        doc.save();
     });
- 
+    res.send(id+" updated");
 });
+
+router.delete('/:id', function(req, res, next) {
+    console.log("entered");
+    var id=req.params.id;
+    Hero.findByIdAndRemove(id).exec();
+    res.send(id+" deleted");
+});
+
 
 function ReplacePropertiesFlat(fromObject,to){
     for(property in fromObject)
