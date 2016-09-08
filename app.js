@@ -9,9 +9,11 @@ var routes = require('./routes');
 var main= routes.main;
 var users = routes.users;
 var heroes=routes.heroes;
+var missions=routes.missions;
 var mongoUrl=require('./models/mongoUrl');
 var app = express();
-console.log(mongoUrl);//TODO
+
+console.log(mongoUrl);
 mongoose.connect(mongoUrl);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,6 +49,7 @@ app.use(function (req, res, next) {
 app.use('/', main);
 app.use('/users', users);
 app.use('/heroes',heroes);
+app.use('/missions',missions);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

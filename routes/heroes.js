@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var Hero=require('../models').Hero;
+var models=require('../models')
+var Hero=models.Hero;
+var utils=models.utils;
 
 router.get('/', function(req, res, next) {
     Hero.find()
@@ -24,7 +26,7 @@ router.put('/:id', function(req, res, next) {
         {
             console.error('error');
         }
-        ReplacePropertiesFlat(req.body,doc);
+        utils.ReplacePropertiesFlat(req.body,doc);
         doc.save();
     });
     res.send(id+" updated");
@@ -37,12 +39,13 @@ router.delete('/:id', function(req, res, next) {
     res.send(id+" deleted");
 });
 
+router.get('/?name=:name', function(req, res, next) {
+    var name = req.params.name;
+    Hero.find({'name':`/${name}/i`})
+    .then(function(doc){
+        res.send(doc);
+    });
+});
 
-function ReplacePropertiesFlat(fromObject,to){
-    for(property in fromObject)
-    {
-        to[property]=fromObject[property];
-    }
-}
 
 module.exports = router;
