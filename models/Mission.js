@@ -10,11 +10,11 @@ var MissionSchema=new Schema({
     assigner : String,
     target : String,
     parentMission : String,
-    childMissions : String[],
+    childMissions : [],
     startTime : Date,
     initialEndTime : Date,
     actualEndTime : Date,
-    reward : number,
+    reward : String,
 },{ collection:'missions'});
 
 var Mission=mongoose.model('Mission',MissionSchema);
