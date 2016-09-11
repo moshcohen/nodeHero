@@ -5,10 +5,18 @@ var Hero=models.Hero;
 var utils=models.utils;
 
 router.get('/', function(req, res, next) {
-    Hero.find()
+     Hero.find()
     .then(function(doc){
         res.send(doc);
     });
+});
+
+router.post('/heroes/', function(req, res, next) {
+    var heroes=req.body;
+     Hero.find({'_id': { $in: heroes } }, 
+          function(err, docs){
+            res.send(docs);
+          });
 });
 
 router.post('/', function(req, res, next) {
@@ -44,6 +52,17 @@ router.get('/?name=:name', function(req, res, next) {
     Hero.find({'name':`/${name}/i`})
     .then(function(doc){
         res.send(doc);
+    });
+});
+
+router.get('/heroPicture/:id', function(req, res, next) {
+    var id = req.params.id;
+    Hero.findById(id,function(err,doc){
+        if(err)
+        {
+            console.error('error');
+        }
+        res.send(doc._doc.picture);
     });
 });
 
